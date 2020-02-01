@@ -5,7 +5,7 @@ require "openweathermap/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "openweathermap"
-  spec.version       = Openweathermap::VERSION
+  spec.version       = OpenWeatherMap::VERSION
   spec.authors       = ["Victor Ribeiro"]
   spec.email         = ["victorp.ribeiro@gmail.com"]
 

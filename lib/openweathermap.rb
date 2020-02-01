@@ -1,6 +1,2 @@
-require "openweathermap/version"
-
-module Openweathermap
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require 'openweathermap/version'
+require 'openweathermap/api'
