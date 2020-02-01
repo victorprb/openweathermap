@@ -18,10 +18,33 @@ module OpenWeatherMap
 
     def weather
       @response = data('weather')
+      if @response['cod'].to_i == 200
+        {
+          status: @response['cod'],
+          city: @response['name'],
+          temperature: @response['main']['temp'],
+          description: @response['weather'].first['description']
+        }
+      else
+        {
+          status: @response['cod'],
+          message: @response['message'],
+        }
+      end
     end
 
     def forecast
       @response = data('forecast')
+      if @response['cod'].to_i == 200
+        {
+          status: @response['cod'],
+        }
+      else
+        {
+          status: @response['cod'],
+          message: @response['message'],
+        }
+      end
     end
 
     private
