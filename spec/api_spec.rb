@@ -8,8 +8,31 @@ RSpec.describe OpenWeatherMap::API do
 
   owm = OpenWeatherMap::API.new(config)
 
-  it 'returns http success' do
-    expect(owm.weather['cod'].to_i).to eq(200)
-    expect(owm.forecast['cod'].to_i).to eq(200)
+  describe 'Current Weather' do
+    let(:response) { owm.weather }
+
+    it 'returns http success' do
+      expect(response[:status].to_i).to eq 200
+    end
+
+    it 'should return a city name' do
+      expect(response[:city]).to be_an(String)
+    end
+
+    it 'should return weather temperature' do
+      expect(response[:temperature]).to be_an(Float)
+    end
+
+    it 'should return weather description' do
+      expect(response[:description]).to be_an(String)
+    end
+  end
+
+  describe 'Forecast Weather' do
+    let(:response) { owm.forecast }
+
+    it 'returns http success' do
+      expect(response[:status].to_i).to eq 200
+    end
   end
 end
