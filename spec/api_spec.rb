@@ -34,5 +34,9 @@ RSpec.describe OpenWeatherMap::API do
     it 'returns http success' do
       expect(response[:status].to_i).to eq 200
     end
+
+    it 'should return five days forecast weather' do
+      expect(response[:weather].length).to eq 5
+    end
   end
 end
