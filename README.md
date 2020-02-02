@@ -1,15 +1,13 @@
-# Openweathermap
+# OpenWeatherMap
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/openweathermap`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is a simple SDK to help get a city current weather and average temperature of 5 days forecast
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'openweathermap'
+gem 'openweathermap', github: 'victorprb/openweathermap'
 ```
 
 And then execute:
@@ -22,17 +20,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Init a client to utilize:
+```ruby
+config = {
+  city_id: '123456', # File with city ids list http://bulk.openweathermap.org/sample/city.list.json.gz
+  api_key: 'your_openweathermap_api_key', # more info here https://openweathermap.org/api
+  units: 'metric', # could be Standard, metric or imperial
+  lang: 'pt_br' # all available language codes https://openweathermap.org/current#multi
+}
 
-## Development
+client = OpenWeatherMap::API.new(config)
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+# Current Weather
+cw = client.weather
+cw[:temperature] # 33
+cw[:description] # 'Nuvens e chuva'
+cw[:city] # 'Campinas'
+cw[:status] # 200
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/openweathermap.
+# Forecast Weather
+fw = client.forecast
+fw[:status] # 200
+fw[:weather].each do |day, temp|
+  puts "#{day} - #{temp}"
+end
+```
 
 ## License
 
